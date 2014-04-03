@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <TextView
+        android:id="@+id/txtPlayer1Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Player1"
+        android:layout_margin="8dp"
+        ></TextView>
+    <TextView
+        android:id="@+id/txtPlayer2Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Player2"
+        android:layout_margin="8dp"
+        ></TextView>
+
+    <TextView
+        android:id="@+id/txtPlayer1Score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score: "
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/txtPlayer1Name"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        ></TextView>
+    
+     <TextView
+        android:id="@+id/txtPlayer2Score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score: "
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/txtPlayer2Name"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        ></TextView>
+     
+     <LinearLayout 
+         android:id="@+id/layoutDiceContainer"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@id/txtPlayer1Score"
+         android:layout_marginRight="8dp"
+         android:layout_marginLeft="8dp"
+         android:layout_marginBottom="8dp"
+         android:layout_marginTop="8dp"
+         android:layout_centerHorizontal="true"
+         android:orientation="horizontal">
+         
+         <ImageView
+             android:id="@+id/imgDice1"
+             android:layout_width="46dp"
+             android:layout_height="46dp"
+             android:scaleType="fitXY"
+             android:src="@drawable/die_face_1"
+             android:layout_marginRight="4dp"></ImageView>
+         
+         <ImageView
+             android:id="@+id/imgDice2"
+             android:layout_width="46dp"
+             android:layout_height="46dp"
+             android:scaleType="fitXY"
+             android:src="@drawable/die_face_2"
+             android:layout_marginRight="4dp"></ImageView>
+         
+         <ImageView
+             android:id="@+id/imgDice3"
+             android:layout_width="46dp"
+             android:layout_height="46dp"
+             android:scaleType="fitXY"
+             android:src="@drawable/die_face_3"
+             android:layout_marginRight="4dp"></ImageView>
+         
+         <ImageView
+             android:id="@+id/imgDice4"
+             android:layout_width="46dp"
+             android:layout_height="46dp"
+             android:scaleType="fitXY"
+             android:src="@drawable/die_face_4"
+             android:layout_marginRight="4dp"></ImageView>
+         
+         <ImageView
+             android:id="@+id/imgDice5"
+             android:layout_width="46dp"
+             android:layout_height="46dp"
+             android:scaleType="fitXY"
+             android:src="@drawable/die_face_5"
+             android:layout_marginRight="4dp"></ImageView>
+         
+         <ImageView
+             android:id="@+id/imgDice6"
+             android:layout_width="46dp"
+             android:layout_height="46dp"
+             android:scaleType="fitXY"
+             android:src="@drawable/die_face_6"></ImageView>
+     </LinearLayout>
+     
+     <Button
+         android:id="@+id/btnSpin"
+         android:layout_width="100dp"
+         android:layout_height="46dp"
+         android:background="@drawable/buttons_selector"
+         android:text="Spin"
+         android:layout_alignParentLeft="true"
+         android:textColor="@android:color/white"
+         android:layout_below="@id/layoutDiceContainer"
+         android:layout_marginLeft="8dp"></Button>
+     
+     <Button
+         android:id="@+id/btnReshuffle"
+         android:layout_width="100dp"
+         android:layout_height="46dp"
+         android:background="@drawable/buttons_selector"
+         android:text="Reshuffle"
+         android:textColor="@android:color/white"
+         android:layout_below="@id/layoutDiceContainer"
+         android:layout_marginRight="8dp"
+         android:layout_alignParentRight="true"></Button>
+     
+     <LinearLayout 
+         android:id="@+id/layoutListContainer"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         android:layout_below="@id/btnSpin"
+         android:weightSum="2"
+         android:layout_margin="8dp">
+         
+         <ListView
+             android:id="@+id/listPlayer1"
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="1"></ListView>
+         
+         <ListView
+             android:id="@+id/listPlayer2"
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="1"></ListView>
+     </LinearLayout>
+</RelativeLayout>
