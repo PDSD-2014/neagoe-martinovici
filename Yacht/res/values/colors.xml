@@ -2,4 +2,5 @@
 <resources>
     <color name="red">#ED1C24</color>
     <color name="darker_red">#C81C24</color>
+    <color name="black">#000000</color>
 </resources>

@@ -33,5 +33,15 @@ public class MainActivity extends Activity {
 			}
 		});
 		
+		mBtnHowToPlay.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(context, Rules.class);
+				startActivity(i);
+				
+			}
+		});
+		
 	}
 }
