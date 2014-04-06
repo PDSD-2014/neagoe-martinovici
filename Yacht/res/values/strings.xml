@@ -7,7 +7,7 @@
     <string name="action_settings">Settings</string>
     <string name="howto1">"1. Tap the shuffle button and see what dice you get."</string>
 	<string name="howto2">"2. Choose which dice to keep by tapping them. After this, press reshuffle to change the
-remaining dice. Reshuffling is allowed twice. You may also choose to keep all your dice."</string>
+remaining dice. Reshuffling is allowed twice. You may also keep all your dice and not reshuffle."</string>
 	<string name="howto3">"3. Select a category and press the ok button ('green tick') to register your score.
 4. Wait for your opponent to do his turn.
 5. Have fun!"</string>
