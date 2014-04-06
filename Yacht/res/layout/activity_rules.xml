@@ -2,7 +2,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent" 
-        android:layout_centerHorizontal="true">
+        android:background="@android:color/white">
  <RelativeLayout
     android:id="@+id/container"
     android:orientation="vertical"
@@ -84,6 +84,452 @@
     android:textSize="20dp"
     android:typeface="serif" />
 
+  <TextView
+      android:id="@+id/headerleft"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@id/three"
+      android:layout_marginBottom="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="Combination" 
+      android:textColor="@color/red"
+      android:textSize="20dp"
+      android:typeface="serif">
+
+  </TextView>
+  
+   <TextView
+       android:id="@+id/headerright"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_below="@id/three"
+       android:layout_marginBottom="8dp"
+       android:layout_marginLeft="8dp"
+       android:layout_marginRight="8dp"
+       android:textColor="@color/red"
+       android:text="Score(min-max)"
+       android:textSize="20dp"
+       android:typeface="serif" >
+ 
+  </TextView>
+  
+   <TextView
+       android:id="@+id/ones"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentLeft="true"
+       android:layout_below="@id/headerleft"
+       android:layout_marginBottom="8dp"
+       android:layout_marginLeft="8dp"
+       android:layout_marginRight="8dp"
+       android:textSize="20dp"
+       android:text="Ones"
+       android:typeface="serif" >
+
+  </TextView>
+  
+    
+  
+    <TextView
+      android:id="@+id/twos"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@id/ones"
+      android:layout_marginBottom="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="Twos" 
+      android:textSize="20dp"
+      android:typeface="serif">
+
+  </TextView>
+  <TextView
+      android:id="@+id/threes"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@id/twos"
+      android:layout_marginBottom="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="Threes" 
+      android:textSize="20dp"
+      android:typeface="serif">
+
+  </TextView>
+  <TextView
+      android:id="@+id/fours"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@id/threes"
+      android:layout_marginBottom="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="Fours" 
+      android:textSize="20dp"
+      android:typeface="serif">
+
+  </TextView>
+  <TextView
+      android:id="@+id/fives"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@id/fours"
+      android:layout_marginBottom="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="Fives" 
+      android:textSize="20dp"
+      android:typeface="serif">
+
+  </TextView>
+  <TextView
+      android:id="@+id/sixes"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@id/fives"
+      android:layout_marginBottom="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="Sixes" 
+      android:textSize="20dp"
+      android:typeface="serif">
+
+  </TextView>
+  <TextView
+      android:id="@+id/onep"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@id/sixes"
+      android:layout_marginBottom="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="1 pair" 
+      android:textSize="20dp"
+      android:typeface="serif">
+
+  </TextView>
+  <TextView
+      android:id="@+id/twop"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@id/onep"
+      android:layout_marginBottom="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="2 pairs" 
+      android:textSize="20dp"
+      android:typeface="serif">
+
+  </TextView>
+  <TextView
+      android:id="@+id/threeoak"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@id/twop"
+      android:layout_marginBottom="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="3 of a kind" 
+      android:textSize="20dp"
+      android:typeface="serif">
+
+  </TextView>
+  <TextView
+      android:id="@+id/full"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@id/threeoak"
+      android:layout_marginBottom="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="Full house" 
+      android:textSize="20dp"
+      android:typeface="serif">
+
+  </TextView>
+  <TextView
+      android:id="@+id/fouroak"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@id/full"
+      android:layout_marginBottom="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="4 of a kind" 
+      android:textSize="20dp"
+      android:typeface="serif">
+
+  </TextView>
+  <TextView
+      android:id="@+id/fivestr"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@id/fouroak"
+      android:layout_marginBottom="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="5 straight" 
+      android:textSize="20dp"
+      android:typeface="serif">
+
+  </TextView>
+  <TextView
+      android:id="@+id/sum"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@id/fivestr"
+      android:layout_marginBottom="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="Sum" 
+      android:textSize="20dp"
+      android:typeface="serif">
+
+  </TextView>
+  <TextView
+      android:id="@+id/yacht"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@id/sum"
+      android:layout_marginBottom="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="Yacht" 
+      android:textSize="20dp"
+      android:typeface="serif">
+
+  </TextView>
+  
+  <TextView
+       android:id="@+id/onesscore"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_below="@id/headerright"
+       android:layout_marginBottom="8dp"
+       android:layout_marginLeft="8dp"
+       android:layout_marginRight="8dp"
+       android:text="0-5"
+       android:textSize="20dp"
+       android:typeface="serif" >
+ 
+  </TextView>
+  <TextView
+       android:id="@+id/twosscore"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_below="@id/onesscore"
+       android:layout_marginBottom="8dp"
+       android:layout_marginLeft="8dp"
+       android:layout_marginRight="8dp"
+       android:text="0-10"
+       android:textSize="20dp"
+       android:typeface="serif" >
+ 
+  </TextView>
+  <TextView
+       android:id="@+id/threesscore"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_below="@id/twosscore"
+       android:layout_marginBottom="8dp"
+       android:layout_marginLeft="8dp"
+       android:layout_marginRight="8dp"
+       android:text="0-15"
+       android:textSize="20dp"
+       android:typeface="serif" >
+ 
+  </TextView>
+  <TextView
+       android:id="@+id/foursscore"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_below="@id/threesscore"
+       android:layout_marginBottom="8dp"
+       android:layout_marginLeft="8dp"
+       android:layout_marginRight="8dp"
+       android:text="0-20"
+       android:textSize="20dp"
+       android:typeface="serif" >
+ 
+  </TextView>
+  <TextView
+       android:id="@+id/fivesscore"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_below="@id/foursscore"
+       android:layout_marginBottom="8dp"
+       android:layout_marginLeft="8dp"
+       android:layout_marginRight="8dp"
+       android:text="0-25"
+       android:textSize="20dp"
+       android:typeface="serif" >
+ 
+  </TextView>
+  <TextView
+       android:id="@+id/sixesscore"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_below="@id/fivesscore"
+       android:layout_marginBottom="8dp"
+       android:layout_marginLeft="8dp"
+       android:layout_marginRight="8dp"
+       android:text="0-30"
+       android:textSize="20dp"
+       android:typeface="serif" >
+ 
+  </TextView>
+  <TextView
+       android:id="@+id/onepscore"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_below="@id/sixesscore"
+       android:layout_marginBottom="8dp"
+       android:layout_marginLeft="8dp"
+       android:layout_marginRight="8dp"
+       android:text="5"
+       android:textSize="20dp"
+       android:typeface="serif" >
+ 
+  </TextView>
+  <TextView
+       android:id="@+id/twopscore"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_below="@id/onepscore"
+       android:layout_marginBottom="8dp"
+       android:layout_marginLeft="8dp"
+       android:layout_marginRight="8dp"
+       android:text="10"
+       android:textSize="20dp"
+       android:typeface="serif" >
+ 
+  </TextView>
+  <TextView
+       android:id="@+id/threeoakscore"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_below="@id/twopscore"
+       android:layout_marginBottom="8dp"
+       android:layout_marginLeft="8dp"
+       android:layout_marginRight="8dp"
+       android:text="15"
+       android:textSize="20dp"
+       android:typeface="serif" >
+ 
+  </TextView>
+  <TextView
+       android:id="@+id/fullscore"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_below="@id/threeoakscore"
+       android:layout_marginBottom="8dp"
+       android:layout_marginLeft="8dp"
+       android:layout_marginRight="8dp"
+       android:text="20"
+       android:textSize="20dp"
+       android:typeface="serif" >
+ 
+  </TextView>
+  <TextView
+       android:id="@+id/fouroakscore"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_below="@id/fullscore"
+       android:layout_marginBottom="8dp"
+       android:layout_marginLeft="8dp"
+       android:layout_marginRight="8dp"
+       android:text="25"
+       android:textSize="20dp"
+       android:typeface="serif" >
+ 
+  </TextView>
+  <TextView
+       android:id="@+id/fivestrscore"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_below="@id/fouroakscore"
+       android:layout_marginBottom="8dp"
+       android:layout_marginLeft="8dp"
+       android:layout_marginRight="8dp"
+       android:text="30"
+       android:textSize="20dp"
+       android:typeface="serif" >
+ 
+  </TextView>
+  <TextView
+       android:id="@+id/sumscore"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_below="@id/fivestrscore"
+       android:layout_marginBottom="8dp"
+       android:layout_marginLeft="8dp"
+       android:layout_marginRight="8dp"
+       android:text="0-30"
+       android:textSize="20dp"
+       android:typeface="serif" >
+ 
+  </TextView>
+  <TextView
+       android:id="@+id/yachtscore"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_below="@id/sumscore"
+       android:layout_marginBottom="8dp"
+       android:layout_marginLeft="8dp"
+       android:layout_marginRight="8dp"
+       android:text="50"
+       android:textSize="20dp"
+       android:typeface="serif" >
+ 
+  </TextView>
+  
+  <TextView
+      android:id="@+id/four"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@id/yacht"
+      android:layout_marginBottom="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:text="@string/howto4" 
+      android:textSize="20dp"
+      android:typeface="serif">
+
+  </TextView>
+  
+
+  
 </RelativeLayout>
 </ScrollView>
    
