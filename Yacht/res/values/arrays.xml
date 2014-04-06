@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="combinations">
+        <item>Ones</item>
+        <item>Twos</item>
+        <item>Threes</item>
+        <item>Fours</item>
+        <item>Fives</item>
+        <item>Sixes</item>
+        <item>1 pair</item>
+        <item>2 pairs </item>
+        <item>3 of a kind</item>
+        <item>Full</item>
+        <item>4 of a kind</item>
+        <item>5 straight</item>
+        <item>Sum</item>
+        <item>Yacht</item>
+    </string-array>
+    
+</resources>    
