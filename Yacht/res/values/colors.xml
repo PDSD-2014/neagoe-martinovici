@@ -3,4 +3,6 @@
     <color name="red">#ED1C24</color>
     <color name="darker_red">#C81C24</color>
     <color name="black">#000000</color>
+    <color name="pale_red">#FF9494</color>
+    <color name="grey">#C3C5C8</color>
 </resources>
