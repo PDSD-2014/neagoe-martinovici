@@ -2,18 +2,20 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent" 
->
-        
- <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" 
         android:layout_centerHorizontal="true">
- 
+ <RelativeLayout
+    android:id="@+id/container"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+  >
    
  
- <ImageView
+<ImageView
     android:id="@+id/i1"
     android:layout_width="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
     android:layout_centerHorizontal="true"
@@ -26,6 +28,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/howto1"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
     android:layout_below="@id/i1"
     android:textColor="@color/black"
     android:textSize="20dp"
@@ -35,7 +39,9 @@
     android:id="@+id/i2"
     android:layout_width="wrap_content"
     android:layout_below="@id/one"
-    android:layout_height="wrap_content" 
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp" 
     android:layout_centerHorizontal="true"
     android:src="@drawable/keep" >
 
@@ -46,6 +52,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/howto2"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
     android:layout_below="@id/i2"  
     android:textColor="@color/black"
     android:textSize="20dp"
@@ -55,6 +63,8 @@
     android:id="@+id/i3"
     android:layout_width="wrap_content"
     android:layout_below="@id/two"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
     android:layout_centerHorizontal="true"
     android:layout_height="wrap_content"
     android:src="@drawable/choice" >
@@ -66,13 +76,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@id/i3"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="8dp"
     android:text="@string/howto3"
     android:textColor="@color/black"
     android:textSize="20dp"
     android:typeface="serif" />
 
-
 </RelativeLayout>
 </ScrollView>
    
-
