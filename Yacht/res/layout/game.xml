@@ -118,7 +118,7 @@
          android:layout_width="100dp"
          android:layout_height="48dp"
          android:background="@drawable/buttons_selector"
-         android:text="Reshuffle"
+         android:text="Reshuffle(2)"
          android:textColor="@android:color/white"
          android:layout_below="@id/layoutDiceContainer"
          android:layout_marginRight="8dp"
