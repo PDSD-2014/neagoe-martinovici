@@ -171,7 +171,7 @@ public class Game extends Activity {
 										
 				//reset active_dices
 				for (int i = 0; i < 5; i++)
-					active_dices.add(true);
+					active_dices.set(i,true);
 				
 				//compute the score
 				int score = getTotalScore();
@@ -389,7 +389,7 @@ public class Game extends Activity {
 			case 6:// 1 pair
 				int pairCounter1 = 0;
 				for (int i = 1; i <= 6; i++)
-					if (diceCount.get(i) == 2)
+					if (diceCount.get(i) >= 2)
 						pairCounter1++;
 				if (pairCounter1 >= 1)
 					score = 5;
@@ -397,7 +397,7 @@ public class Game extends Activity {
 			case 7:// 2 pairs
 				int pairCounter = 0;
 				for (int i = 1; i <= 6; i++)
-					if (diceCount.get(i) == 2)
+					if (diceCount.get(i) >= 2)
 						pairCounter++;
 				if (pairCounter == 2)
 					score = 10;
@@ -405,7 +405,7 @@ public class Game extends Activity {
 				break;
 			case 8: // 3 oak
 				for (Integer i : diceCount)
-					if (i == 3)
+					if (i >= 3)
 						score = 15;
 				break;
 			case 9: // Full House
@@ -419,7 +419,7 @@ public class Game extends Activity {
 				break;
 			case 10: // 4 oak
 				for (Integer i : diceCount)
-					if (i == 4)
+					if (i >= 4)
 						score = 25;
 				break;
 			case 11:// 5 straight
