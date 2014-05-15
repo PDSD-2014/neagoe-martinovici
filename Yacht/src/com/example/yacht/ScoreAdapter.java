@@ -1,6 +1,6 @@
 package com.example.yacht;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,14 +12,15 @@ import android.widget.TextView;
 public class ScoreAdapter extends BaseAdapter {
 
 	Context context;
-	List<String> list;
+	ArrayList<Choice> list;
 	Integer player;
-	
-	public ScoreAdapter(Context c, List<String> l, Integer player){
+
+	public ScoreAdapter(Context c, ArrayList<Choice> l, Integer player) {
 		this.context = c;
 		this.list = l;
 		this.player = player;
 	}
+
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -42,22 +43,25 @@ public class ScoreAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		View view;
-		
-		if(convertView == null){
-			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			view = inflater.inflate(R.layout.list_item_left_player, parent, false);
+
+		if (convertView == null) {
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			view = inflater.inflate(R.layout.list_item_left_player, parent,
+					false);
 		}
-		
+
 		else
 			view = convertView;
-		
+
 		TextView combName = (TextView) view.findViewById(R.id.txtCombName);
 		TextView combScore = (TextView) view.findViewById(R.id.txtCombScore);
-		
-		combName.setText(list.get(position).toString());
-		
-		if(player == 1)
-			combName.setBackgroundColor(context.getResources().getColor(R.color.pale_red));
+
+		combName.setText(list.get(position).getName());
+		combScore.setText(list.get(position).getValue());
+		if (player == 1)
+			combName.setBackgroundColor(context.getResources().getColor(
+					R.color.pale_red));
 		return view;
 	}
 
