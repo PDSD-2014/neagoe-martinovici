@@ -57,6 +57,7 @@ public class ConnectActivity extends Activity {
 				data[0] = hisIp;
 				data[1] = first.toString();
 				i.putExtra("data", data);
+				startActivity(i);
 
 			}
 		});
