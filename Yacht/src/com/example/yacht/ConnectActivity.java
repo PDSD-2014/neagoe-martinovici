@@ -223,3 +223,4 @@ public class ConnectActivity extends Activity {
 		});
 	}
 }
+
