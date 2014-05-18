@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView 
+        android:id="@+id/txtMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter your partner's IP address"
+        android:textColor="@color/darker_red"
+        android:layout_margin="16dp"/>
+    
+	<EditText
+	    android:id="@+id/edtID"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:hint="X.X.X.X"
+	    android:inputType="number"
+	    android:layout_marginLeft="16dp"
+	    android:layout_marginRight="16dp"
+	    android:layout_marginBottom="16dp"
+	    ></EditText>
+	
+	<TextView 
+	    android:id="@+id/txtFirst"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="Let's see who's first!"
+	    android:textColor="@color/darker_red"
+	    android:layout_marginLeft="16dp"
+	    android:layout_marginRight="16dp"
+	    android:layout_marginBottom="16dp"/>
+	
+	<Button
+	    android:id="@+id/btnRandom"
+	    android:layout_width="160dp"
+	    android:layout_height="48dp"
+	    android:text="Generate random number"
+	    android:textColor="@android:color/white"
+	    android:background="@drawable/buttons_selector"
+	    android:layout_marginLeft="16dp"
+	    android:layout_marginRight="16dp"
+	    android:layout_marginBottom="16dp"
+	    ></Button>
+	
+	<TextView
+	    android:id="@+id/txtMyNr"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="16dp"
+	    android:layout_marginRight="16dp"
+	    android:layout_marginBottom="16dp"
+	    ></TextView>
+	
+	<TextView
+	    android:id="@+id/txtHisNr"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="16dp"
+	    android:layout_marginRight="16dp"
+	    android:layout_marginBottom="16dp"
+	    ></TextView>
+	
+	<TextView
+	    android:id="@+id/txtResult"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:textColor="@color/darker_red"
+	    android:layout_marginLeft="16dp"
+	    android:layout_marginRight="16dp"
+	    android:layout_marginBottom="16dp"
+	    ></TextView>
+    
+</LinearLayout>
