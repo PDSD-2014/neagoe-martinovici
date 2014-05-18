@@ -39,7 +39,7 @@ public class Game extends Activity {
 	ImageView imgDie3;
 	ImageView imgDie4;
 	ImageView imgDie5;
-	
+
 	TextView myScore;
 	TextView hisScore;
 
@@ -57,23 +57,24 @@ public class Game extends Activity {
 
 	ArrayList<Choice> myScores;
 	ArrayList<Choice> hisScores;
-	
+
 	// counts how many dice of each number I have
 	ArrayList<Integer> diceCount;
-	
+
 	// last selection on list.
 	Integer lastSelection = null;
-	
+
 	boolean isShuffled = false;
-	
+
 	Vector<Boolean> selections;
-	
+
 	String partnerIp;
 	String myTurn;
-	
+
 	String recvData;
 	String sendData;
-	
+	Integer hisMoves = 0;
+	Integer MAX_MOVES = 14;
 	Context c;
 
 	@Override
@@ -82,26 +83,25 @@ public class Game extends Activity {
 		setContentView(R.layout.game);
 
 		c = this;
-		
-		//receive IP address of partner and turn order
+
+		// receive IP address of partner and turn order
 		String[] data = new String[2];
 		data = getIntent().getStringArrayExtra("data");
-		
+
 		partnerIp = data[0];
 		myTurn = data[1];
-		
+
 		Log.e("REC DATA", data[0] + " " + data[1]);
-				
+
 		btnShuffle = (Button) findViewById(R.id.btnShuffle);
-		if(myTurn.equals("0"))
+		if (myTurn.equals("0"))
 			btnShuffle.setEnabled(false);
-		
-		
+
 		btnReshuffle = (Button) findViewById(R.id.btnReshuffle);
 		btnReshuffle.setEnabled(false);
 		btnDone = (Button) findViewById(R.id.btnDone);
 		btnDone.setEnabled(false);
-		
+
 		myScore = (TextView) findViewById(R.id.txtPlayer1Score);
 		hisScore = (TextView) findViewById(R.id.txtPlayer2Score);
 
@@ -110,7 +110,7 @@ public class Game extends Activity {
 		imgDie3 = (ImageView) findViewById(R.id.imgDice3);
 		imgDie4 = (ImageView) findViewById(R.id.imgDice4);
 		imgDie5 = (ImageView) findViewById(R.id.imgDice5);
-		
+
 		imgDie1.setEnabled(false);
 		imgDie2.setEnabled(false);
 		imgDie3.setEnabled(false);
@@ -120,7 +120,6 @@ public class Game extends Activity {
 		listPlayer1 = (ListView) findViewById(R.id.listPlayer1);
 		listPlayer2 = (ListView) findViewById(R.id.listPlayer2);
 
-			
 		String[] combinations = this.getResources().getStringArray(
 				getResources().getIdentifier("combinations", "array",
 						getPackageName()));
@@ -134,10 +133,9 @@ public class Game extends Activity {
 			hisScores.add(new Choice(score, ""));
 		}
 
-		
 		listPlayer1.setAdapter(new ScoreAdapter(this, myScores, 0));
 		listPlayer2.setAdapter(new ScoreAdapter(this, hisScores, 1));
-		
+
 		dices = new Vector<Integer>(5);
 		for (int i = 0; i < 5; i++)
 			dices.add(0);
@@ -149,8 +147,8 @@ public class Game extends Activity {
 		active_dices = new Vector<Boolean>(5);
 		for (int i = 0; i < 5; i++)
 			active_dices.add(true);
-		
-		//vector that says which item on the list can be chose
+
+		// vector that says which item on the list can be chose
 		// i can select everything on the list
 		selections = new Vector<Boolean>();
 		for (int i = 0; i < 14; i++)
@@ -211,42 +209,60 @@ public class Game extends Activity {
 						Log.e(TAG, "Cannot get inputstream");
 					}
 
-					//Need to parse data
+					// Need to parse data
 					final String[] partnerRes = recvData.split("-");
 					Log.e("POZ", partnerRes[0]);
 					Log.e("VAL", partnerRes[1]);
 					Log.e("SCORE", partnerRes[2]);
-					
-					hisScore.post(new Runnable(){
+
+					hisScore.post(new Runnable() {
 
 						@Override
 						public void run() {
 							// TODO Auto-generated method stub
 							hisScore.setText("Score:" + partnerRes[2]);
-						}});
-					
-					
-					hisScores.get(Integer.parseInt(partnerRes[0])).setValue(partnerRes[1]);
-										
-					btnShuffle.post(new Runnable(){
+						}
+					});
+
+					hisScores.get(Integer.parseInt(partnerRes[0])).setValue(
+							partnerRes[1]);
+					hisMoves++;
+					btnShuffle.post(new Runnable() {
 
 						@Override
 						public void run() {
 							// TODO Auto-generated method stub
-							btnShuffle.setEnabled(true);
-						}});
-					
-					runOnUiThread(new Runnable(){
+							if (myTurn.equals("1") && hisMoves == MAX_MOVES) {
+								btnShuffle.setEnabled(false);
+							}
+							else
+								btnShuffle.setEnabled(true);
+						}
+					});
+
+					runOnUiThread(new Runnable() {
 
 						@Override
 						public void run() {
 							// TODO Auto-generated method stub
-							((BaseAdapter) listPlayer2.getAdapter()).notifyDataSetChanged();
-							Toast.makeText(c, "Your turn", Toast.LENGTH_SHORT).show();
-						}});
-					
-					
-					
+							((BaseAdapter) listPlayer2.getAdapter())
+									.notifyDataSetChanged();
+							if (myTurn.equals("1") && hisMoves == MAX_MOVES) {
+								if (Integer.parseInt(hisScore.getText()
+										.toString()) > Integer.parseInt(myScore
+										.getText().toString()))
+									Toast.makeText(c, "GAME OVER!\nYou lose!",
+											Toast.LENGTH_LONG).show();
+								else
+									Toast.makeText(c, "GAME OVER!\nYou win!",
+											Toast.LENGTH_LONG).show();
+							}
+							else
+								Toast.makeText(c, "Your turn",
+										Toast.LENGTH_SHORT).show();
+						}
+					});
+
 					// Make sure data is sent and allocated resources are
 					// cleared.
 					try {
@@ -262,82 +278,89 @@ public class Game extends Activity {
 
 			}
 		}
-		
+
 		Thread greetingServer = new Thread(new SingleThreadedServer());
 		greetingServer.start();
-		
+
 		listPlayer1.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				if(isShuffled == true && selections.get(position) == true){
+				if (isShuffled == true && selections.get(position) == true) {
 					if (lastSelection != null)
 						myScores.get(lastSelection).setValue("");
 					countDice();
-					myScores.get(position).setValue(getScore(position).toString());
+					myScores.get(position).setValue(
+							getScore(position).toString());
 
-					((BaseAdapter) listPlayer1.getAdapter()).notifyDataSetChanged();
+					((BaseAdapter) listPlayer1.getAdapter())
+							.notifyDataSetChanged();
 					lastSelection = position;
-					
+
 					btnDone.setEnabled(true);
 				}
 			}
 		});
 
-		//when i pressed done i finished my turn
+		// when i pressed done i finished my turn
 		btnDone.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
-				//do not enable shuffle yet because it is not your turn
+
+				// do not enable shuffle yet because it is not your turn
 				btnShuffle.setEnabled(false);
-				
-				//reshuffle will be enabled after shuffle
+
+				// reshuffle will be enabled after shuffle
 				btnReshuffle.setEnabled(false);
-				
-				//this is set false so you can't make clicks on the list
+
+				// this is set false so you can't make clicks on the list
 				isShuffled = false;
-				
-				//you can't press again done
+
+				// you can't press again done
 				btnDone.setEnabled(false);
-				
-				//you have again two reshuffles available
+
+				// you have again two reshuffles available
 				reshuffle_count = 2;
-				
-				//this is reflected on the button text
+
+				// this is reflected on the button text
 				btnReshuffle.setText("Reshuffle" + "("
 						+ String.valueOf(reshuffle_count) + ")");
-				
-				//i can't press anymore on this item of the list
+
+				// i can't press anymore on this item of the list
 				selections.set(lastSelection, false);
-				
-														
-				//reset active_dices
+
+				// reset active_dices
 				for (int i = 0; i < 5; i++)
-					active_dices.set(i,true);
-				
-				//compute the score
+					active_dices.set(i, true);
+
+				// compute the score
 				int score = getTotalScore();
-				
+
 				myScore.setText("Score: " + String.valueOf(score));
-				
-				//reset the images
+
+				// reset the images
 				imgDie1.setImageResource(getResources().getIdentifier(
-						getPackageName() + ":drawable/" + "die_face_1", null, null));
+						getPackageName() + ":drawable/" + "die_face_1", null,
+						null));
 				imgDie2.setImageResource(getResources().getIdentifier(
-						getPackageName() + ":drawable/" + "die_face_2", null, null));
+						getPackageName() + ":drawable/" + "die_face_2", null,
+						null));
 				imgDie3.setImageResource(getResources().getIdentifier(
-						getPackageName() + ":drawable/" + "die_face_3", null, null));
+						getPackageName() + ":drawable/" + "die_face_3", null,
+						null));
 				imgDie4.setImageResource(getResources().getIdentifier(
-						getPackageName() + ":drawable/" + "die_face_4", null, null));
+						getPackageName() + ":drawable/" + "die_face_4", null,
+						null));
 				imgDie5.setImageResource(getResources().getIdentifier(
-						getPackageName() + ":drawable/" + "die_face_5", null, null));
-				
-				sendData = lastSelection + "-" + myScores.get(lastSelection).getValue() + "-" + 
-							String.valueOf(score);
-				
+						getPackageName() + ":drawable/" + "die_face_5", null,
+						null));
+
+				sendData = lastSelection + "-"
+						+ myScores.get(lastSelection).getValue() + "-"
+						+ String.valueOf(score);
+
 				new Thread(new Runnable() {
 
 					@Override
@@ -348,16 +371,14 @@ public class Game extends Activity {
 
 							OutputStream responseStream = null;
 							try {
-								responseStream = clientSocket
-										.getOutputStream();
+								responseStream = clientSocket.getOutputStream();
 							}
 							catch (IOException e) {
 								Log.e("CLIENT", "Cannot get outputstream.");
 							}
 
 							// Wrap it with a PrinStream for convenience.
-							PrintStream writer = new PrintStream(
-									responseStream);
+							PrintStream writer = new PrintStream(responseStream);
 
 							writer.print(sendData);
 							// Release the resource.
@@ -365,41 +386,46 @@ public class Game extends Activity {
 						}
 						catch (UnknownHostException e) {
 							Log.e("CLIENT", "Unknown host");
-							Toast.makeText(Game.this,
-									"Unknown host.", Toast.LENGTH_SHORT)
-									.show();
+							Toast.makeText(Game.this, "Unknown host.",
+									Toast.LENGTH_SHORT).show();
 						}
 						catch (IOException e) {
 							Log.e("CLIENT", "Error opening client socket.");
-							Toast.makeText(Game.this,
-									"Cannot open socket..",
+							Toast.makeText(Game.this, "Cannot open socket..",
 									Toast.LENGTH_SHORT).show();
 						}
 
 					}
 				}).start();
-				
-				//reset the lastSelection for the next turn
+				if (myTurn.equals("0") && hisMoves == MAX_MOVES) {
+					if (Integer.parseInt(hisScore.getText().toString()) > Integer
+							.parseInt(myScore.getText().toString()))
+						Toast.makeText(c, "GAME OVER!\nYou lose!",
+								Toast.LENGTH_LONG).show();
+					else
+						Toast.makeText(c, "GAME OVER!\nYou win!",
+								Toast.LENGTH_LONG).show();
+				}
+				// reset the lastSelection for the next turn
 				lastSelection = null;
 			}
 		});
-		
-		
+
 		btnShuffle.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				// we have to generate 5 random numbers
-				
+
 				isShuffled = true;
-				
+
 				imgDie1.setEnabled(true);
 				imgDie2.setEnabled(true);
 				imgDie3.setEnabled(true);
 				imgDie4.setEnabled(true);
 				imgDie5.setEnabled(true);
-				
+
 				for (int i = 0; i < 5; i++) {
 					Random rand = new Random();
 					Integer val = rand.nextInt(6) + 1;
@@ -424,7 +450,7 @@ public class Game extends Activity {
 
 				btnShuffle.setEnabled(false);
 				btnReshuffle.setEnabled(true);
-				
+
 				listPlayer1.setClickable(true);
 			}
 		});
@@ -645,13 +671,13 @@ public class Game extends Activity {
 		// for (int i = 1; i < diceCount.size(); i++)
 		// Log.e("CRISTI's DICE", "nr de" + (i) + " este " + diceCount.get(i));
 	}
-	
-	public Integer getTotalScore(){
-		
+
+	public Integer getTotalScore() {
+
 		int score = 0;
-		
+
 		for (int i = 0; i < myScores.size(); i++)
-			if(myScores.get(i).getValue() != "")
+			if (myScores.get(i).getValue() != "")
 				score += Integer.valueOf(myScores.get(i).getValue());
 		return score;
 	}
