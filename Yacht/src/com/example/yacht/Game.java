@@ -15,6 +15,7 @@ import java.util.Random;
 import java.util.Vector;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -40,6 +41,7 @@ public class Game extends Activity {
 	ImageView imgDie5;
 	
 	TextView myScore;
+	TextView hisScore;
 
 	ListView listPlayer1;
 	ListView listPlayer2;
@@ -71,12 +73,15 @@ public class Game extends Activity {
 	
 	String recvData;
 	String sendData;
+	
+	Context c;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game);
 
+		c = this;
 		
 		//receive IP address of partner and turn order
 		String[] data = new String[2];
@@ -98,6 +103,7 @@ public class Game extends Activity {
 		btnDone.setEnabled(false);
 		
 		myScore = (TextView) findViewById(R.id.txtPlayer1Score);
+		hisScore = (TextView) findViewById(R.id.txtPlayer2Score);
 
 		imgDie1 = (ImageView) findViewById(R.id.imgDice1);
 		imgDie2 = (ImageView) findViewById(R.id.imgDice2);
@@ -206,10 +212,26 @@ public class Game extends Activity {
 					}
 
 					//Need to parse data
-					String[] partnerRes = recvData.split("-");
+					final String[] partnerRes = recvData.split("-");
 					Log.e("POZ", partnerRes[0]);
 					Log.e("VAL", partnerRes[1]);
 					Log.e("SCORE", partnerRes[2]);
+					
+					hisScore.post(new Runnable(){
+
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							hisScore.setText("Score:" + partnerRes[2]);
+						}});
+					
+					
+					hisScores.get(Integer.parseInt(partnerRes[0])).setValue(partnerRes[1]);
+					((BaseAdapter) listPlayer2.getAdapter()).notifyDataSetChanged();
+					btnShuffle.setEnabled(true);
+					
+					Toast.makeText(c, "Your turn", Toast.LENGTH_SHORT).show();;
+					
 					
 					// Make sure data is sent and allocated resources are
 					// cleared.
