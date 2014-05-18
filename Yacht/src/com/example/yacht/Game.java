@@ -228,9 +228,23 @@ public class Game extends Activity {
 					
 					hisScores.get(Integer.parseInt(partnerRes[0])).setValue(partnerRes[1]);
 					((BaseAdapter) listPlayer2.getAdapter()).notifyDataSetChanged();
-					btnShuffle.setEnabled(true);
 					
-					Toast.makeText(c, "Your turn", Toast.LENGTH_SHORT).show();;
+					btnShuffle.post(new Runnable(){
+
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							btnShuffle.setEnabled(true);
+						}});
+					
+					runOnUiThread(new Runnable(){
+
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							Toast.makeText(c, "Your turn", Toast.LENGTH_SHORT).show();
+						}});
+					
 					
 					
 					// Make sure data is sent and allocated resources are
