@@ -76,6 +76,7 @@ public class Game extends Activity {
 	Integer hisMoves = 0;
 	Integer MAX_MOVES = 14;
 	Context c;
+	Integer hisLatestScore;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -221,6 +222,7 @@ public class Game extends Activity {
 						public void run() {
 							// TODO Auto-generated method stub
 							hisScore.setText("Score:" + partnerRes[2]);
+							hisLatestScore = Integer.parseInt(partnerRes[2]);
 						}
 					});
 
@@ -248,9 +250,7 @@ public class Game extends Activity {
 							((BaseAdapter) listPlayer2.getAdapter())
 									.notifyDataSetChanged();
 							if (myTurn.equals("1") && hisMoves == MAX_MOVES) {
-								if (Integer.parseInt(hisScore.getText()
-										.toString()) > Integer.parseInt(myScore
-										.getText().toString()))
+								if (hisLatestScore > getTotalScore())
 									Toast.makeText(c, "GAME OVER!\nYou lose!",
 											Toast.LENGTH_LONG).show();
 								else
@@ -338,7 +338,7 @@ public class Game extends Activity {
 				// compute the score
 				int score = getTotalScore();
 
-				myScore.setText("Score: " + String.valueOf(score));
+				myScore.setText("Score:" + String.valueOf(score));
 
 				// reset the images
 				imgDie1.setImageResource(getResources().getIdentifier(
@@ -398,8 +398,7 @@ public class Game extends Activity {
 					}
 				}).start();
 				if (myTurn.equals("0") && hisMoves == MAX_MOVES) {
-					if (Integer.parseInt(hisScore.getText().toString()) > Integer
-							.parseInt(myScore.getText().toString()))
+					if (hisLatestScore > getTotalScore())
 						Toast.makeText(c, "GAME OVER!\nYou lose!",
 								Toast.LENGTH_LONG).show();
 					else
