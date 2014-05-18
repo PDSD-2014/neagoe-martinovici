@@ -13,35 +13,36 @@ public class MainActivity extends Activity {
 	Button mBtnNewGame;
 	Button mBtnHowToPlay;
 	Context context;
-	
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		mBtnNewGame = (Button) findViewById(R.id.btnNewGame);
 		mBtnHowToPlay = (Button) findViewById(R.id.btnHowPlay);
-		
+
 		context = this;
-		
+
 		mBtnNewGame.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(context, Game.class);
+				Intent i = new Intent(context, ConnectActivity.class);
 				startActivity(i);
 			}
 		});
-		
+
 		mBtnHowToPlay.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(context, Rules.class);
 				startActivity(i);
-				
+
 			}
 		});
-		
+
 	}
 }

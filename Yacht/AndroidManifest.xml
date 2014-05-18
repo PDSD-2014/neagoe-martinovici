@@ -25,11 +25,17 @@
         </activity>
         <activity
             android:name="com.example.yacht.Game"
-            android:label="Play Yacht!" >
+            android:label="Play Yacht!"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.yacht.Rules"
-            android:label="How to play Yacht" >
+            android:label="How to play Yacht"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.yacht.ConnectActivity"
+            android:label="@string/title_activity_connect" >
         </activity>
     </application>
 
