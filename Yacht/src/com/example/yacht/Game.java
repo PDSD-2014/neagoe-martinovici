@@ -227,6 +227,9 @@ public class Game extends Activity {
 			}
 		}
 		
+		Thread greetingServer = new Thread(new SingleThreadedServer());
+		greetingServer.start();
+		
 		listPlayer1.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
