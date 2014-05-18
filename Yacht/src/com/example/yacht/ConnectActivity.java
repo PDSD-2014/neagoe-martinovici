@@ -72,6 +72,7 @@ public class ConnectActivity extends Activity {
 				try {
 					// Beware: Only privileged users can use ports below 1023.
 					in = new ServerSocket(9000);
+					Log.i("Server", "server created");
 				}
 				catch (IOException e) {
 					Log.e(TAG,
