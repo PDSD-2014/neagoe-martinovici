@@ -227,8 +227,7 @@ public class Game extends Activity {
 					
 					
 					hisScores.get(Integer.parseInt(partnerRes[0])).setValue(partnerRes[1]);
-					((BaseAdapter) listPlayer2.getAdapter()).notifyDataSetChanged();
-					
+										
 					btnShuffle.post(new Runnable(){
 
 						@Override
@@ -242,6 +241,7 @@ public class Game extends Activity {
 						@Override
 						public void run() {
 							// TODO Auto-generated method stub
+							((BaseAdapter) listPlayer2.getAdapter()).notifyDataSetChanged();
 							Toast.makeText(c, "Your turn", Toast.LENGTH_SHORT).show();
 						}});
 					
