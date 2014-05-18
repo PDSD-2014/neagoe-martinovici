@@ -1,5 +1,14 @@
 package com.example.yacht;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -7,6 +16,7 @@ import java.util.Vector;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -15,6 +25,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Game extends Activity {
 
@@ -54,13 +65,33 @@ public class Game extends Activity {
 	boolean isShuffled = false;
 	
 	Vector<Boolean> selections;
+	
+	String partnerIp;
+	String myTurn;
+	
+	String recvData;
+	String sendData;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game);
 
+		
+		//receive IP address of partner and turn order
+		String[] data = new String[2];
+		data = getIntent().getStringArrayExtra("data");
+		
+		partnerIp = data[0];
+		myTurn = data[1];
+		
+		Log.e("REC DATA", data[0] + " " + data[1]);
+				
 		btnShuffle = (Button) findViewById(R.id.btnShuffle);
+		if(myTurn.equals("0"))
+			btnShuffle.setEnabled(false);
+		
+		
 		btnReshuffle = (Button) findViewById(R.id.btnReshuffle);
 		btnReshuffle.setEnabled(false);
 		btnDone = (Button) findViewById(R.id.btnDone);
@@ -119,6 +150,83 @@ public class Game extends Activity {
 		for (int i = 0; i < 14; i++)
 			selections.add(true);
 
+		class SingleThreadedServer implements Runnable {
+
+			private final static String TAG = "ServerThread";
+
+			// For a TCP connection (i.e. a server) we need a ServerSocket
+			private ServerSocket in;
+
+			// In the constructor we try creating the server socket, on port
+			// 9000.
+			public SingleThreadedServer() {
+				try {
+					// Beware: Only privileged users can use ports below 1023.
+					in = new ServerSocket(9001);
+				}
+				catch (IOException e) {
+					Log.e(TAG,
+							"Cannot create socket. Due to: " + e.getMessage());
+				}
+			}
+
+			@Override
+			public void run() {
+
+				// Always try serving incoming requests.
+				while (true) {
+					// For every request we are allocated a new socket.
+					Socket incomingRequest = null;
+
+					try {
+						// Wait in blocked state for a request.
+						incomingRequest = in.accept();
+					}
+					catch (IOException e) {
+						Log.e(TAG, "Error when accepting connection.");
+					}
+
+					// When accept() returns a new request was received.
+					// We use the incomingRequest socket for I/O
+					Log.d(TAG,
+							"New request from: "
+									+ incomingRequest.getInetAddress());
+
+					// Get its associated OutputStream for writing.
+					InputStream receiveStream = null;
+					try {
+						receiveStream = incomingRequest.getInputStream();
+						BufferedReader b = new BufferedReader(
+								new InputStreamReader(receiveStream));
+						recvData = b.readLine();
+						Log.e(TAG, " nr lui " + recvData);
+					}
+					catch (IOException e) {
+						Log.e(TAG, "Cannot get inputstream");
+					}
+
+					//Need to parse data
+					String[] partnerRes = recvData.split("-");
+					Log.e("POZ", partnerRes[0]);
+					Log.e("VAL", partnerRes[1]);
+					Log.e("SCORE", partnerRes[2]);
+					
+					// Make sure data is sent and allocated resources are
+					// cleared.
+					try {
+						incomingRequest.close();
+					}
+					catch (IOException e) {
+						Log.e(TAG, "Error finishing request.");
+					}
+
+					Log.d(TAG, "Sent greeting.");
+					// Continue the looping.
+				}
+
+			}
+		}
+		
 		listPlayer1.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -144,8 +252,8 @@ public class Game extends Activity {
 			@Override
 			public void onClick(View v) {
 				
-				//re-enable shuffle
-				btnShuffle.setEnabled(true);
+				//do not enable shuffle yet because it is not your turn
+				btnShuffle.setEnabled(false);
 				
 				//reshuffle will be enabled after shuffle
 				btnReshuffle.setEnabled(false);
@@ -166,9 +274,7 @@ public class Game extends Activity {
 				//i can't press anymore on this item of the list
 				selections.set(lastSelection, false);
 				
-				//reset the lastSelection for the next turn
-				lastSelection = null;
-										
+														
 				//reset active_dices
 				for (int i = 0; i < 5; i++)
 					active_dices.set(i,true);
@@ -189,6 +295,53 @@ public class Game extends Activity {
 						getPackageName() + ":drawable/" + "die_face_4", null, null));
 				imgDie5.setImageResource(getResources().getIdentifier(
 						getPackageName() + ":drawable/" + "die_face_5", null, null));
+				
+				sendData = lastSelection + "-" + myScores.get(lastSelection).getValue() + "-" + 
+							String.valueOf(score);
+				
+				new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						try {
+							// Open the socket.
+							Socket clientSocket = new Socket(partnerIp, 9001);
+
+							OutputStream responseStream = null;
+							try {
+								responseStream = clientSocket
+										.getOutputStream();
+							}
+							catch (IOException e) {
+								Log.e("CLIENT", "Cannot get outputstream.");
+							}
+
+							// Wrap it with a PrinStream for convenience.
+							PrintStream writer = new PrintStream(
+									responseStream);
+
+							writer.print(sendData);
+							// Release the resource.
+							clientSocket.close();
+						}
+						catch (UnknownHostException e) {
+							Log.e("CLIENT", "Unknown host");
+							Toast.makeText(Game.this,
+									"Unknown host.", Toast.LENGTH_SHORT)
+									.show();
+						}
+						catch (IOException e) {
+							Log.e("CLIENT", "Error opening client socket.");
+							Toast.makeText(Game.this,
+									"Cannot open socket..",
+									Toast.LENGTH_SHORT).show();
+						}
+
+					}
+				}).start();
+				
+				//reset the lastSelection for the next turn
+				lastSelection = null;
 			}
 		});
 		
