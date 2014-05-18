@@ -45,6 +45,8 @@ public class ConnectActivity extends Activity {
 		result = (TextView) findViewById(R.id.txtResult);
 		go = (Button) findViewById(R.id.btnGo);
 		c = this;
+		Random nr = new Random();
+		myNumber = nr.nextInt(10000000);
 		go.setEnabled(false);
 		go.setOnClickListener(new View.OnClickListener() {
 
@@ -108,7 +110,7 @@ public class ConnectActivity extends Activity {
 						BufferedReader b = new BufferedReader(
 								new InputStreamReader(receiveStream));
 						hisNumber = b.readLine();
-						Log.e(TAG, hisNumber);
+						Log.e(TAG, " nr lui " + hisNumber);
 					}
 					catch (IOException e) {
 						Log.e(TAG, "Cannot get inputstream");
@@ -195,8 +197,7 @@ public class ConnectActivity extends Activity {
 								// Wrap it with a PrinStream for convenience.
 								PrintStream writer = new PrintStream(
 										responseStream);
-								Random nr = new Random();
-								myNumber = nr.nextInt(10000000);
+
 								writer.print(myNumber.toString());
 								// Release the resource.
 								clientSocket.close();
@@ -223,4 +224,3 @@ public class ConnectActivity extends Activity {
 		});
 	}
 }
-
